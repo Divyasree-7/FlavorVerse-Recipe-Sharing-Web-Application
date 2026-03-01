@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explore Recipes — FlavorVerse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script>(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('fv_theme')||'dark'); })();</script>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="nav scrolled" id="navbar">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html">
+      <div class="logo-icon">F</div>
+      <span class="logo-name">FlavorVerse</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="../index.html" data-t="home">Home</a>
+      <a class="nav-link active" href="explore.html" data-t="explore">Explore</a>
+      <a class="nav-link" href="chefs.html" data-t="chefs">Chefs</a>
+    </nav>
+    <div class="nav-right">
+      <button class="nav-icon-btn" id="searchBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <button class="theme-btn" id="themeBtn">☀️</button>
+      <div class="lang-wrap">
+        <button class="lang-btn" id="langBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span id="langLabel">EN</span></button>
+        <div class="lang-drop" id="langDrop">
+          <div class="lang-opt" data-lang="en">🇬🇧 English</div>
+          <div class="lang-opt" data-lang="hi">🇮🇳 Hindi</div>
+          <div class="lang-opt" data-lang="te">🇮🇳 Telugu</div>
+          <div class="lang-opt" data-lang="kn">🇮🇳 Kannada</div>
+          <div class="lang-opt" data-lang="ta">🇮🇳 Tamil</div>
+          <div class="lang-opt" data-lang="es">🇪🇸 Español</div>
+          <div class="lang-opt" data-lang="fr">🇫🇷 Français</div>
+          <div class="lang-opt" data-lang="ar">🇸🇦 العربية</div>
+        </div>
+      </div>
+      <a href="submit.html" class="btn btn-p" style="font-size:.78rem;padding:.45rem 1rem">+ Submit</a>
+      <button class="ham" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mob-nav" id="mobNav">
+  <a class="mob-link" href="../index.html">🏠 Home</a>
+  <a class="mob-link active" href="explore.html">🔍 Explore</a>
+  <a class="mob-link" href="chefs.html">👨‍🍳 Chefs</a>
+  <div class="mob-div"></div>
+  <div style="padding:.5rem 1rem"><button onclick="toggleTheme()" style="width:100%;background:var(--surf);padding:.6rem;border-radius:var(--r2);color:var(--tx);font-weight:600">🌙 Toggle Theme</button></div>
+  <a class="mob-cta" href="submit.html">+ Submit Recipe</a>
+</nav>
+
+<!-- Search -->
+<div class="search-ov" id="searchOv">
+  <div class="s-box">
+    <div class="s-inner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="s-field" id="sField" type="text" placeholder="Search recipes…" autocomplete="off">
+      <button class="s-close" id="sCloseBtn">ESC</button>
+    </div>
+    <div class="s-results" id="sResults"></div>
+  </div>
+</div>
+
+<!-- Page Hero — NO loader here -->
+<section class="page-hero">
+  <div class="wrap" style="position:relative;z-index:1">
+    <p class="ph-sup">Browse All</p>
+    <h1 class="ph-title">Explore Recipes</h1>
+    <p class="ph-sub">500+ authentic dishes from 60+ countries — filtered just for you</p>
+  </div>
+</section>
+
+<!-- Filter Bar -->
+<div class="xfbar">
+  <div class="wrap">
+    <div class="xf-inner">
+      <span class="xflbl">Filter</span>
+      <span class="xfsep"></span>
+      <select class="xfsel" id="xCat" onchange="applyFilters()">
+        <option value="">All Meals</option>
+        <option value="breakfast">🌅 Breakfast</option>
+        <option value="lunch">☀️ Lunch</option>
+        <option value="dinner">🌙 Dinner</option>
+        <option value="snacks">🍿 Snacks</option>
+        <option value="drinks">🥤 Drinks</option>
+        <option value="desserts">🍰 Desserts</option>
+      </select>
+      <span class="xfsep"></span>
+      <select class="xfsel" id="xCuis" onchange="applyFilters()">
+        <option value="">All Cuisines</option>
+        <option>Indian</option><option>Italian</option><option>Japanese</option>
+        <option>Mexican</option><option>French</option><option>Chinese</option>
+        <option>Thai</option><option>Middle Eastern</option><option>American</option>
+        <option>Brazilian</option><option>Nordic</option><option>Global</option>
+      </select>
+      <span class="xfsep"></span>
+      <select class="xfsel" id="xTime" onchange="applyFilters()">
+        <option value="">Any Time</option>
+        <option value="15">Under 15 min</option>
+        <option value="30">Under 30 min</option>
+        <option value="60">Under 1 hour</option>
+      </select>
+      <span class="xfsep"></span>
+      <select class="xfsel" id="xSort" onchange="applyFilters()">
+        <option value="rating">Top Rated</option>
+        <option value="time">Quickest</option>
+        <option value="likes">Most Popular</option>
+        <option value="cal">Lowest Cal</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Results -->
+<section class="section">
+  <div class="wrap">
+    <div class="xrbar">
+      <span class="xcnt" id="xCount">Loading…</span>
+      <div class="vbtns">
+        <button class="vbtn on" id="gridBtn" onclick="setView('grid')" title="Grid view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="vbtn" id="listBtn" onclick="setView('list')" title="List view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="xGrid" class="recipe-grid"></div>
+  </div>
+</section>
+
+<!-- Recipe Modal -->
+<div class="modal-ov" id="recipeModal"><div class="modal modal-wide"><div id="recipeModalContent"></div><div class="modal-foot"><button class="btn btn-p" onclick="addGrocery(currentRecipeId)">🛒 Add to List</button><button class="btn btn-o" onclick="closeModal('recipeModal')">Close</button></div></div></div>
+<div class="modal-ov" id="groceryModal"><div class="modal"><div class="modal-head"><h3>🛒 Grocery List</h3><button class="modal-x" onclick="closeModal('groceryModal')">✕</button></div><div class="modal-body" id="groceryBody"></div><div class="modal-foot"><button class="btn btn-p" onclick="window.print()">Print</button><button class="btn btn-o" onclick="clearGrocery()">Clear</button></div></div></div>
+
+<!-- Timer FAB -->
+<button class="timer-fab" id="timerFab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></button>
+<div class="timer-panel" id="timerPanel"><div class="tp-head"><h4>⏱️ Timer</h4><button class="tp-x" id="timerClose">✕</button></div><div class="tp-disp" id="timerDisp">00:00:00</div><div class="tp-presets"><button class="tp-pre" onclick="Timer.set(5)">5m</button><button class="tp-pre" onclick="Timer.set(10)">10m</button><button class="tp-pre" onclick="Timer.set(15)">15m</button><button class="tp-pre" onclick="Timer.set(30)">30m</button><button class="tp-pre" onclick="Timer.set(60)">1h</button></div><div class="tp-custom"><input type="number" id="tMin" placeholder="mm" min="0" max="59"><span>:</span><input type="number" id="tSec" placeholder="ss" min="0" max="59"><button class="tp-set" onclick="Timer.custom()">Set</button></div><div class="tp-ctrls"><button class="tp-btn go" onclick="Timer.start()"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><button class="tp-btn" onclick="Timer.pause()"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button><button class="tp-btn" onclick="Timer.reset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></button></div></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+let currentRecipeId = null;
+let currentView = 'grid';
+let filtered = [...DB.recipes];
+
+function applyFilters() {
+  const cat  = document.getElementById('xCat').value;
+  const cuis = document.getElementById('xCuis').value;
+  const time = +document.getElementById('xTime').value;
+  const sort = document.getElementById('xSort').value;
+  filtered = DB.recipes.filter(r =>
+    (!cat  || r.cat===cat) &&
+    (!cuis || r.cuisine===cuis) &&
+    (!time || r.time<=time)
+  );
+  if(sort==='rating') filtered.sort((a,b)=>b.rating-a.rating);
+  else if(sort==='time') filtered.sort((a,b)=>a.time-b.time);
+  else if(sort==='likes') filtered.sort((a,b)=>b.likes-a.likes);
+  else if(sort==='cal') filtered.sort((a,b)=>a.cal-b.cal);
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('xGrid');
+  const cnt  = document.getElementById('xCount');
+  cnt.textContent = `${filtered.length} recipe${filtered.length!==1?'s':''} found`;
+  if(!filtered.length){ grid.className='recipe-grid'; grid.innerHTML='<div class="empty"><h3>No recipes found</h3><p>Try adjusting your filters</p></div>'; return; }
+  if(currentView==='grid') {
+    grid.className='recipe-grid';
+    grid.innerHTML = filtered.map((r,i)=>recipeCardHTML(r,i)).join('');
+  } else {
+    grid.className='list-view';
+    grid.innerHTML = filtered.map(r=>`
+      <div class="list-card rv" onclick="openRecipeModal(${r.id})">
+        <img src="${r.img}" alt="${r.title}" loading="lazy">
+        <div class="list-card-body">
+          <h3>${r.title}</h3>
+          <div class="list-meta"><span>${r.cuisine}</span><span>•</span><span>${r.cat}</span><span>•</span><span>${r.time} min</span><span>•</span><span>${r.cal} cal</span><span>•</span><span>★ ${r.rating}</span></div>
+        </div>
+      </div>`).join('');
+  }
+  initReveal();
+}
+
+function setView(v) {
+  currentView = v;
+  document.getElementById('gridBtn').classList.toggle('on', v==='grid');
+  document.getElementById('listBtn').classList.toggle('on', v==='list');
+  renderGrid();
+}
+
+// URL param
+const _origOpen = openRecipeModal;
+window.openRecipeModal = function(id){ currentRecipeId=id; _origOpen(id); };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');
+  if(cat){ const sel=document.getElementById('xCat'); if(sel) sel.value=cat; }
+  applyFilters();
+  applyTheme(FV.theme);
+});
+</script>
+</body>
+</html>

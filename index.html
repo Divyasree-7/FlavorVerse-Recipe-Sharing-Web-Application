@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FlavorVerse — World Recipes</title>
+<meta name="description" content="500+ authentic world recipes from 60+ countries. AI-powered cooking assistant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+// Apply theme BEFORE render to prevent flash
+(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('fv_theme')||'dark'); })();
+</script>
+</head>
+<body>
+
+<!-- ═══ LOADER (homepage only) ═══ -->
+<div id="loader">
+  <!-- Ambient orbs -->
+  <div class="l-orb lo1"></div>
+  <div class="l-orb lo2"></div>
+  <div class="l-orb lo3"></div>
+
+ 
+
+  <!-- Center animation -->
+  <div class="l-center">
+    <div class="l-icon-wrap">
+      <div class="l-ring1"></div>
+      <div class="l-ring2"></div>
+      <div class="l-ring3"></div>
+      <div class="l-emoji">🍽️</div>
+    </div>
+
+    <div class="l-word">FlavorVerse</div>
+    <div class="l-tag">World Recipes · AI Chef · 500+ Dishes</div>
+
+    <div class="l-bar-wrap">
+      <div class="l-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Bouncing food row -->
+  
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="nav" id="navbar">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon">F</div>
+      <span class="logo-name">FlavorVerse</span>
+    </a>
+
+    <nav class="nav-links">
+      <a class="nav-link active" href="index.html" data-t="home">Home</a>
+      <a class="nav-link" href="pages/explore.html" data-t="explore">Explore</a>
+      <a class="nav-link" href="pages/chefs.html" data-t="chefs">Chefs</a>
+      <a class="nav-link" href="#breakfast">Breakfast</a>
+      <a class="nav-link" href="#lunch">Lunch</a>
+      <a class="nav-link" href="#dinner">Dinner</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="nav-icon-btn" id="searchBtn" title="Search (Ctrl+K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+
+      <!-- Theme Toggle -->
+      <button class="theme-btn" id="themeBtn" title="Toggle theme">☀️</button>
+
+      <!-- Language -->
+      <div class="lang-wrap">
+        <button class="lang-btn" id="langBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span id="langLabel">EN</span>
+        </button>
+        <div class="lang-drop" id="langDrop">
+          <div class="lang-opt" data-lang="en">🇬🇧 English</div>
+          <div class="lang-opt" data-lang="hi">🇮🇳 Hindi</div>
+          <div class="lang-opt" data-lang="te">🇮🇳 Telugu</div>
+          <div class="lang-opt" data-lang="kn">🇮🇳 Kannada</div>
+          <div class="lang-opt" data-lang="ta">🇮🇳 Tamil</div>
+          <div class="lang-opt" data-lang="es">🇪🇸 Español</div>
+          <div class="lang-opt" data-lang="fr">🇫🇷 Français</div>
+          <div class="lang-opt" data-lang="ar">🇸🇦 العربية</div>
+        </div>
+      </div>
+
+      <a href="pages/explore.html" class="btn btn-p" style="font-size:.78rem;padding:.45rem 1rem" data-t="explore">Explore</a>
+      <button class="ham" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mob-nav" id="mobNav">
+  <a class="mob-link active" href="index.html">🏠 Home</a>
+  <a class="mob-link" href="pages/explore.html">🔍 Explore</a>
+  <a class="mob-link" href="pages/chefs.html">👨‍🍳 Chefs</a>
+  <div class="mob-div"></div>
+  <a class="mob-link" href="#breakfast">🌅 Breakfast</a>
+  <a class="mob-link" href="#lunch">☀️ Lunch</a>
+  <a class="mob-link" href="#dinner">🌙 Dinner</a>
+  <a class="mob-link" href="#snacks">🍿 Snacks</a>
+  <div class="mob-div"></div>
+  <div style="padding:.5rem 1rem">
+    <button class="theme-btn" onclick="toggleTheme()" style="width:auto;background:var(--surf);padding:.5rem 1rem;border-radius:var(--r2);width:100%;justify-content:center;color:var(--tx)">🌙 Toggle Theme</button>
+  </div>
+  <a class="mob-cta" href="pages/submit.html">+ Submit Recipe</a>
+</nav>
+
+<!-- ═══ SEARCH ═══ -->
+<div class="search-ov" id="searchOv">
+  <div class="s-box">
+    <div class="s-inner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="s-field" id="sField" type="text" placeholder="Search recipes, cuisines, ingredients…" data-tp="searchPlaceholder" autocomplete="off">
+      <button class="s-close" id="sCloseBtn">ESC</button>
+    </div>
+    <div class="s-results" id="sResults"></div>
+    <p class="s-hint">Try: "biryani", "pasta", "vegan", "quick"</p>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-mesh"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <!-- Left -->
+      <div class="hero-left rv">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Live · 500+ Recipes · 60+ Countries
+        </div>
+        <h1 class="hero-h1">
+          The World on
+          <em>Your Plate</em>
+        </h1>
+        <p class="hero-p">Discover authentic recipes from 60+ countries, powered by an AI chef assistant that helps you cook with confidence — from beginner to gourmet.</p>
+        <div class="hero-acts">
+          <a href="pages/explore.html" class="btn btn-p">🔍 Explore Recipes</a>
+          <a href="#ai-chat" class="btn btn-o">Ask Chef AI</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hst"><span class="hst-n" data-count="500" data-suffix="+">0+</span><span class="hst-l">Recipes</span></div>
+          <div class="hst-sep"></div>
+          <div class="hst"><span class="hst-n" data-count="60" data-suffix="+">0+</span><span class="hst-l">Countries</span></div>
+          <div class="hst-sep"></div>
+          <div class="hst"><span class="hst-n" data-count="48" data-suffix="k">0k</span><span class="hst-l">Cooks</span></div>
+        </div>
+      </div>
+
+      <!-- Right Mosaic -->
+      <div class="hero-mosaic rv d2">
+        <div class="hm hm-a" onclick="openRecipeModal(9)">
+          <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=700&q=80" alt="Biryani" loading="eager">
+          <div class="hm-ov"><p class="hm-title">Chicken Biryani</p><p class="hm-meta">Indian · 60 min · ★ 4.9</p></div>
+        </div>
+        <div class="hm hm-b" onclick="openRecipeModal(11)">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" alt="Pizza" loading="eager">
+          <div class="hm-ov"><p class="hm-title">Margherita Pizza</p><p class="hm-meta">Italian · 45 min</p></div>
+        </div>
+        <div class="hm hm-c" onclick="openRecipeModal(17)">
+          <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500&q=80" alt="Ramen" loading="eager">
+          <div class="hm-ov"><p class="hm-title">Tonkotsu Ramen</p><p class="hm-meta">Japanese · 90 min</p></div>
+        </div>
+        <div class="hm hm-d" onclick="openRecipeModal(34)">
+          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&q=80" alt="Tiramisu" loading="eager">
+          <div class="hm-ov"><p class="hm-title">Tiramisu</p><p class="hm-meta">Italian · 30 min</p></div>
+        </div>
+
+        <!-- Float badges -->
+        <div class="h-float hf-top">
+          <div class="hf-row"><span class="hf-ico">🔥</span><div class="hf-t"><strong>#1 Today</strong><small>Chicken Biryani</small></div></div>
+        </div>
+        <div class="h-float hf-right hf-b">
+          <div class="hf-row"><span class="hf-ico">⭐</span><div class="hf-t"><strong>Top Rated</strong><small>4.9 · 4,100+ likes</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATEGORY TABS ═══ -->
+<div class="cat-tabs">
+  <div class="wrap">
+    <div class="cat-tabs-inner">
+      <a class="cat-tab active" href="#breakfast">🌅 Breakfast</a>
+      <a class="cat-tab" href="#lunch">☀️ Lunch</a>
+      <a class="cat-tab" href="#dinner">🌙 Dinner</a>
+      <a class="cat-tab" href="#snacks">🍿 Snacks</a>
+      <a class="cat-tab" href="#drinks">🥤 Drinks</a>
+      <a class="cat-tab" href="#desserts">🍰 Desserts</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEATURED STRIP ═══ -->
+<section class="featured-strip section">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Curated</p><h2 class="sec-title">Top Picks Right Now</h2></div>
+      <a href="pages/explore.html" class="btn btn-gh">View all →</a>
+    </div>
+    <div class="strip-scroll" id="featuredStrip"></div>
+  </div>
+</section>
+
+<!-- ═══ BREAKFAST ═══ -->
+<section class="section section-alt meal-section cat-bg-breakfast" id="breakfast">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Morning</p><h2 class="sec-title">🌅 Breakfast</h2></div>
+      <a href="pages/explore.html?cat=breakfast" class="btn btn-gh">See all →</a>
+    </div>
+    <div class="fpills" id="bpills">
+      <button class="fpill active" onclick="filterSection('breakfast','all',this)">All</button>
+      <button class="fpill" onclick="filterSection('breakfast','Indian',this)">Indian</button>
+      <button class="fpill" onclick="filterSection('breakfast','American',this)">American</button>
+      <button class="fpill" onclick="filterSection('breakfast','French',this)">French</button>
+      <button class="fpill" onclick="filterSection('breakfast','Brazilian',this)">Brazilian</button>
+    </div>
+    <div class="recipe-grid" id="breakfast-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ VIDEO SPOTLIGHT ═══ -->
+<section class="vid-section">
+  <div class="wrap">
+    <div class="vid-grid">
+      <div class="rv">
+        <p class="sec-sup">Watch & Cook</p>
+        <h2 class="sec-title" style="margin-bottom:1rem">Follow Along With Our Top Chefs</h2>
+        <p style="color:var(--tx2);font-size:.95rem;line-height:1.8;margin-bottom:1.5rem">Watch step-by-step video recipes from our expert chefs. From beginner-friendly dishes to advanced techniques — learn while you cook.</p>
+        <a href="pages/explore.html" class="btn btn-p">Browse Video Recipes →</a>
+      </div>
+      <div class="rv d2">
+        <div class="vid-frame">
+          <iframe src="https://www.youtube.com/embed/vMBvnzIcTnE" title="Chicken Biryani" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LUNCH ═══ -->
+<section class="section meal-section cat-bg-lunch" id="lunch">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Midday</p><h2 class="sec-title">☀️ Lunch</h2></div>
+      <a href="pages/explore.html?cat=lunch" class="btn btn-gh">See all →</a>
+    </div>
+    <div class="fpills" id="lpills">
+      <button class="fpill active" onclick="filterSection('lunch','all',this)">All</button>
+      <button class="fpill" onclick="filterSection('lunch','Italian',this)">Italian</button>
+      <button class="fpill" onclick="filterSection('lunch','Indian',this)">Indian</button>
+      <button class="fpill" onclick="filterSection('lunch','Mexican',this)">Mexican</button>
+      <button class="fpill" onclick="filterSection('lunch','Thai',this)">Thai</button>
+    </div>
+    <div class="recipe-grid" id="lunch-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ AI CHAT ═══ -->
+<section class="ai-section" id="ai-chat">
+  <div class="wrap">
+    <div class="ai-grid">
+      <!-- Left info -->
+      <div class="rv">
+        <div class="ai-badge"><span class="ai-live"></span>AI Powered · Live</div>
+        <h2 class="sec-title" style="margin-bottom:1.2rem">Your Personal<br>Chef AI</h2>
+        <p style="color:var(--tx2);font-size:.92rem;line-height:1.8;margin-bottom:1.5rem">Powered by Claude AI — ask anything about cooking. From quick substitutions to complex techniques, Chef Claude has your back.</p>
+        <div class="ai-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Recipe recommendations based on your ingredients</div>
+        <div class="ai-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Cooking techniques for any skill level</div>
+        <div class="ai-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Ingredient substitutions & dietary adaptations</div>
+        <div class="ai-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Instant answers in multiple languages</div>
+      </div>
+
+      <!-- Chat Window -->
+      <div class="rv d2">
+        <div class="chat-win">
+          <!-- Header bar -->
+          <div class="chat-bar">
+            <span class="chat-av">👨‍🍳</span>
+            <div class="chat-info">
+              <strong>Chef Claude</strong>
+              <small>AI Cooking Assistant</small>
+            </div>
+            <div class="chat-status">
+              <span class="chat-dot"></span>
+              Online
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div class="chat-msgs" id="chatMsgs"></div>
+
+          <!-- Quick chips -->
+          <div class="chat-chips" id="chatChips">
+            <button class="chip" onclick="ChefBot.quickSend('How to make biryani?')">How to make biryani?</button>
+            <button class="chip" onclick="ChefBot.quickSend('Substitute for eggs in baking')">Egg substitutes</button>
+            <button class="chip" onclick="ChefBot.quickSend('Fix a bland curry')">Fix bland curry</button>
+            <button class="chip" onclick="ChefBot.quickSend('Perfect pasta tips')">Perfect pasta</button>
+          </div>
+
+          <!-- Input -->
+          <div class="chat-input-row">
+            <input class="chat-in" id="chatInp" type="text" placeholder="Ask me anything about cooking…" autocomplete="off">
+            <button class="chat-send" id="chatSendBtn" title="Send">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DINNER ═══ -->
+<section class="section meal-section cat-bg-dinner" id="dinner">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Evening</p><h2 class="sec-title">🌙 Dinner</h2></div>
+      <a href="pages/explore.html?cat=dinner" class="btn btn-gh">See all →</a>
+    </div>
+    <div class="fpills" id="dpills">
+      <button class="fpill active" onclick="filterSection('dinner','all',this)">All</button>
+      <button class="fpill" onclick="filterSection('dinner','Indian',this)">Indian</button>
+      <button class="fpill" onclick="filterSection('dinner','Japanese',this)">Japanese</button>
+      <button class="fpill" onclick="filterSection('dinner','Italian',this)">Italian</button>
+      <button class="fpill" onclick="filterSection('dinner','French',this)">French</button>
+    </div>
+    <div class="recipe-grid" id="dinner-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ SNACKS ═══ -->
+<section class="section section-alt meal-section cat-bg-snacks" id="snacks">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Bite-Size</p><h2 class="sec-title">🍿 Snacks</h2></div>
+      <a href="pages/explore.html?cat=snacks" class="btn btn-gh">See all →</a>
+    </div>
+    <div class="recipe-grid" id="snacks-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ DRINKS ═══ -->
+<section class="section meal-section cat-bg-drinks" id="drinks">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Refresh</p><h2 class="sec-title">🥤 Drinks</h2></div>
+      <a href="pages/explore.html?cat=drinks" class="btn btn-gh">See all →</a>
+    </div>
+    <div class="recipe-grid" id="drinks-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ DESSERTS ═══ -->
+<section class="section section-alt meal-section cat-bg-desserts" id="desserts">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Sweet</p><h2 class="sec-title">🍰 Desserts</h2></div>
+      <a href="pages/explore.html?cat=desserts" class="btn btn-gh">See all →</a>
+    </div>
+    <div class="recipe-grid" id="desserts-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ CHEFS ═══ -->
+<section class="section section-alt" id="chefs-section">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Our Experts</p><h2 class="sec-title">Meet the Chefs</h2></div>
+      <a href="pages/chefs.html" class="btn btn-gh">View leaderboard →</a>
+    </div>
+    <div class="chefs-grid" id="chefsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER ═══ -->
+<section class="nl-section">
+  <div class="wrap">
+    <div class="nl-content rv">
+      <h2 class="nl-title">Cook More, Explore More</h2>
+      <p class="nl-p">Get weekly recipe drops, cooking tips, and seasonal meal ideas delivered to your inbox.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="your@email.com" data-tp="emailPlaceholder">
+        <button onclick="toast('Welcome to FlavorVerse! 🎉')">Subscribe</button>
+      </div>
+      <p class="nl-note">No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="f-logo" href="index.html">Flavor<span>Verse</span></a>
+        <p class="f-desc">The world's most vibrant recipe community. Discover, cook, and share authentic flavors from every corner of the globe.</p>
+        <div class="f-socials">
+          <a class="f-soc" href="#" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+          <a class="f-soc" href="#" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a class="f-soc" href="#" title="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a class="f-soc" href="#" title="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.76 1.22-5.17 1.22-5.17s-.31-.62-.31-1.54c0-1.45.84-2.53 1.88-2.53.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.88 1.54 1.88 1.85 0 3.1-2.37 3.1-5.17 0-2.13-1.43-3.63-3.48-3.63-2.36 0-3.75 1.77-3.75 3.6 0 .71.27 1.47.62 1.89.07.08.08.15.06.23-.06.26-.2.83-.23.95-.03.15-.11.18-.25.11-1.4-.65-2.28-2.7-2.28-4.35 0-3.54 2.57-6.8 7.41-6.8 3.89 0 6.91 2.77 6.91 6.47 0 3.86-2.43 6.97-5.81 6.97-1.13 0-2.2-.59-2.57-1.28l-.7 2.6c-.25.97-.93 2.19-1.39 2.93C11 21.96 11.5 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Discover</h5>
+        <a href="pages/explore.html">All Recipes</a>
+        <a href="pages/explore.html?cat=breakfast">Breakfast</a>
+        <a href="pages/explore.html?cat=lunch">Lunch</a>
+        <a href="pages/explore.html?cat=dinner">Dinner</a>
+        <a href="pages/explore.html?cat=desserts">Desserts</a>
+      </div>
+      <div class="f-col">
+        <h5>Community</h5>
+        <a href="pages/chefs.html">Top Chefs</a>
+        <a href="pages/submit.html">Submit Recipe</a>
+        <a href="#ai-chat">Chef AI</a>
+        <a href="#">Weekly Picks</a>
+      </div>
+      <div class="f-col">
+        <h5>About</h5>
+        <a href="#">About Us</a>
+        <a href="#">How It Works</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2025 FlavorVerse. All rights reserved.</span>
+      <span>Made with ❤️ for food lovers worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ TIMER FAB ═══ -->
+<button class="timer-fab" id="timerFab" title="Cooking Timer">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+</button>
+<div class="timer-panel" id="timerPanel">
+  <div class="tp-head">
+    <h4>⏱️ Cooking Timer</h4>
+    <button class="tp-x" id="timerClose">✕</button>
+  </div>
+  <div class="tp-disp" id="timerDisp">00:00:00</div>
+  <div class="tp-presets">
+    <button class="tp-pre" onclick="Timer.set(5)">5m</button>
+    <button class="tp-pre" onclick="Timer.set(10)">10m</button>
+    <button class="tp-pre" onclick="Timer.set(15)">15m</button>
+    <button class="tp-pre" onclick="Timer.set(30)">30m</button>
+    <button class="tp-pre" onclick="Timer.set(60)">1h</button>
+  </div>
+  <div class="tp-custom">
+    <input type="number" id="tMin" placeholder="mm" min="0" max="59">
+    <span>:</span>
+    <input type="number" id="tSec" placeholder="ss" min="0" max="59">
+    <button class="tp-set" onclick="Timer.custom()">Set</button>
+  </div>
+  <div class="tp-ctrls">
+    <button class="tp-btn go" onclick="Timer.start()"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+    <button class="tp-btn" onclick="Timer.pause()"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+    <button class="tp-btn" onclick="Timer.reset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></button>
+  </div>
+</div>
+
+<!-- ═══ RECIPE MODAL ═══ -->
+<div class="modal-ov" id="recipeModal">
+  <div class="modal modal-wide">
+    <div id="recipeModalContent"></div>
+    <div class="modal-foot">
+      <button class="btn btn-p" onclick="addGrocery(currentRecipeId)">🛒 Add to Grocery List</button>
+      <button class="btn btn-o" onclick="closeModal('recipeModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GROCERY MODAL ═══ -->
+<div class="modal-ov" id="groceryModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🛒 Grocery List</h3>
+      <button class="modal-x" onclick="closeModal('groceryModal')">✕</button>
+    </div>
+    <div class="modal-body" id="groceryBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-p" onclick="window.print()">🖨️ Print</button>
+      <button class="btn btn-o" onclick="clearGrocery()">🗑️ Clear All</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ai.js"></script>
+<script>
+let currentRecipeId = null;
+
+// Render sections
+document.addEventListener('DOMContentLoaded', () => {
+  // Featured strip
+  const featured = DB.recipes.filter(r=>r.rating>=4.8).slice(0,8);
+  document.getElementById('featuredStrip').innerHTML = featured.map(r=>`
+    <div class="strip-card rv" onclick="openRecipeModal(${r.id})">
+      <img src="${r.img}" alt="${r.title}" loading="lazy">
+      <span class="strip-tag tag${r.cat==='desserts'?' tag-r':r.cat==='drinks'?' tag-a':''}">${r.tag}</span>
+      <div class="strip-ov">
+        <p class="strip-title">${r.title}</p>
+        <p class="strip-sub">${r.cuisine} · ${r.time} min</p>
+        <div class="strip-rating"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>${r.rating}</div>
+      </div>
+    </div>`).join('');
+
+  // Meal sections
+  ['breakfast','lunch','dinner','snacks','drinks','desserts'].forEach(cat => {
+    const grid = document.getElementById(`${cat}-grid`);
+    if(!grid) return;
+    const recipes = DB.recipes.filter(r=>r.cat===cat);
+    grid.innerHTML = recipes.map((r,i)=>recipeCardHTML(r,i)).join('');
+  });
+
+  // Chefs
+  const grid = document.getElementById('chefsGrid');
+  if(grid) grid.innerHTML = DB.chefs.map(c=>`
+    <div class="chef-card rv">
+      <img src="${c.img}" alt="${c.name}" loading="lazy">
+      <div class="chef-name">${c.name}</div>
+      <div class="chef-cntry">${c.country}</div>
+      <div class="chef-spec">${c.specialty}</div>
+      <div class="chef-stat">${c.recipes} recipes · ★ ${c.rating}</div>
+      <button class="chef-follow ${FV.follows.includes(c.name)?'following':''}" onclick="followChef('${c.name}',this)">${FV.follows.includes(c.name)?'Following':'Follow'}</button>
+    </div>`).join('');
+
+  initReveal();
+});
+
+// Section filter
+function filterSection(cat, cuisine, btn) {
+  const grid = document.getElementById(`${cat}-grid`);
+  if(!grid) return;
+  btn.closest('.fpills').querySelectorAll('.fpill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const recipes = DB.recipes.filter(r=>r.cat===cat && (cuisine==='all'||r.cuisine===cuisine));
+  grid.innerHTML = recipes.length
+    ? recipes.map((r,i)=>recipeCardHTML(r,i)).join('')
+    : '<div class="empty"><h3>No recipes found</h3><p>Try another filter</p></div>';
+  initReveal();
+}
+
+// Override openRecipeModal to track current id
+const _origOpen = openRecipeModal;
+window.openRecipeModal = function(id) { currentRecipeId = id; _origOpen(id); };
+</script>
+</body>
+</html>

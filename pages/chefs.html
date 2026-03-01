@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Top Chefs — FlavorVerse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script>(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('fv_theme')||'dark'); })();</script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="nav scrolled" id="navbar">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html"><div class="logo-icon">F</div><span class="logo-name">FlavorVerse</span></a>
+    <nav class="nav-links">
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="explore.html">Explore</a>
+      <a class="nav-link active" href="chefs.html">Chefs</a>
+    </nav>
+    <div class="nav-right">
+      <button class="nav-icon-btn" id="searchBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <button class="theme-btn" id="themeBtn">☀️</button>
+      <div class="lang-wrap">
+        <button class="lang-btn" id="langBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span id="langLabel">EN</span></button>
+        <div class="lang-drop" id="langDrop">
+          <div class="lang-opt" data-lang="en">🇬🇧 English</div>
+          <div class="lang-opt" data-lang="hi">🇮🇳 Hindi</div>
+          <div class="lang-opt" data-lang="te">🇮🇳 Telugu</div>
+          <div class="lang-opt" data-lang="kn">🇮🇳 Kannada</div>
+          <div class="lang-opt" data-lang="ta">🇮🇳 Tamil</div>
+          <div class="lang-opt" data-lang="es">🇪🇸 Español</div>
+          <div class="lang-opt" data-lang="fr">🇫🇷 Français</div>
+          <div class="lang-opt" data-lang="ar">🇸🇦 العربية</div>
+        </div>
+      </div>
+      <a href="submit.html" class="btn btn-p" style="font-size:.78rem;padding:.45rem 1rem">+ Submit</a>
+      <button class="ham" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mob-nav" id="mobNav">
+  <a class="mob-link" href="../index.html">🏠 Home</a>
+  <a class="mob-link" href="explore.html">🔍 Explore</a>
+  <a class="mob-link active" href="chefs.html">👨‍🍳 Chefs</a>
+  <div class="mob-div"></div>
+  <div style="padding:.5rem 1rem"><button onclick="toggleTheme()" style="width:100%;background:var(--surf);padding:.6rem;border-radius:var(--r2);color:var(--tx);font-weight:600">🌙 Toggle Theme</button></div>
+  <a class="mob-cta" href="submit.html">+ Submit Recipe</a>
+</nav>
+
+<div class="search-ov" id="searchOv"><div class="s-box"><div class="s-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="s-field" id="sField" type="text" placeholder="Search recipes…" autocomplete="off"><button class="s-close" id="sCloseBtn">ESC</button></div><div class="s-results" id="sResults"></div></div></div>
+
+<!-- Page Hero — NO loader -->
+<div class="dark-hero">
+  <div class="wrap" style="position:relative;z-index:1;padding-bottom:3rem">
+    <div style="text-align:center;margin-bottom:3rem">
+      <p class="sec-sup" style="text-align:center">Leaderboard</p>
+      <h1 style="font-family:var(--fnt-d);font-size:clamp(2.5rem,5vw,4rem);color:var(--tx);letter-spacing:-1.5px;margin-bottom:.5rem">Top Chefs</h1>
+      <p style="color:var(--tx2);font-size:.95rem">Ranked by recipes contributed and community ratings</p>
+    </div>
+
+    <!-- Podium -->
+    <div class="podium-wrap" id="podium"></div>
+  </div>
+</div>
+
+<!-- Leaderboard -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Full Rankings</p><h2 class="sec-title">All Chefs</h2></div>
+      <div style="display:flex;gap:.4rem">
+        <select id="sortChefs" onchange="renderLeaderboard()" style="background:var(--surf);border:1.5px solid var(--b2);border-radius:var(--r1);padding:.36rem .65rem;color:var(--tx);font-size:.8rem;outline:none">
+          <option value="rating">By Rating</option>
+          <option value="recipes">By Recipes</option>
+        </select>
+      </div>
+    </div>
+    <div id="leaderboard"></div>
+  </div>
+</section>
+
+<!-- All Chefs Grid -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="sec-sup">Community</p><h2 class="sec-title">Meet Everyone</h2></div>
+    </div>
+    <div class="chefs-grid" id="allChefsGrid"></div>
+  </div>
+</section>
+
+<div class="modal-ov" id="recipeModal"><div class="modal modal-wide"><div id="recipeModalContent"></div><div class="modal-foot"><button class="btn btn-o" onclick="closeModal('recipeModal')">Close</button></div></div></div>
+
+<button class="timer-fab" id="timerFab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></button>
+<div class="timer-panel" id="timerPanel"><div class="tp-head"><h4>⏱️ Timer</h4><button class="tp-x" id="timerClose">✕</button></div><div class="tp-disp" id="timerDisp">00:00:00</div><div class="tp-presets"><button class="tp-pre" onclick="Timer.set(5)">5m</button><button class="tp-pre" onclick="Timer.set(10)">10m</button><button class="tp-pre" onclick="Timer.set(15)">15m</button><button class="tp-pre" onclick="Timer.set(30)">30m</button></div><div class="tp-custom"><input type="number" id="tMin" placeholder="mm" min="0" max="59"><span>:</span><input type="number" id="tSec" placeholder="ss" min="0" max="59"><button class="tp-set" onclick="Timer.custom()">Set</button></div><div class="tp-ctrls"><button class="tp-btn go" onclick="Timer.start()"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button><button class="tp-btn" onclick="Timer.pause()"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button><button class="tp-btn" onclick="Timer.reset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></button></div></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+function renderPodium() {
+  const sorted = [...DB.chefs].sort((a,b)=>b.rating-a.rating);
+  const [first, second, third] = sorted;
+  document.getElementById('podium').innerHTML = `
+    <div class="pod rv d2">
+      <img src="${second.img}" alt="${second.name}" style="width:74px;height:74px">
+      <div class="pod-name">${second.name}</div>
+      <div class="pod-sub">★ ${second.rating}</div>
+      <div class="pod-stand pod-2">2</div>
+    </div>
+    <div class="pod rv">
+      <img src="${first.img}" alt="${first.name}" style="width:90px;height:90px;border-color:var(--amber);box-shadow:0 0 26px rgba(255,184,48,.4)">
+      <div class="pod-name">${first.name}</div>
+      <div class="pod-sub" style="color:var(--amber)">★ ${first.rating} · 🥇 #1</div>
+      <div class="pod-stand pod-1">1</div>
+    </div>
+    <div class="pod rv d3">
+      <img src="${third.img}" alt="${third.name}" style="width:74px;height:74px">
+      <div class="pod-name">${third.name}</div>
+      <div class="pod-sub">★ ${third.rating}</div>
+      <div class="pod-stand pod-3">3</div>
+    </div>`;
+}
+
+function renderLeaderboard() {
+  const sort = document.getElementById('sortChefs').value;
+  const sorted = [...DB.chefs].sort((a,b)=> sort==='rating'?b.rating-a.rating:b.recipes-a.recipes);
+  const rankCls = ['rank-1','rank-2','rank-3'];
+  document.getElementById('leaderboard').innerHTML = sorted.map((c,i)=>`
+    <div class="lb-item rv">
+      <div class="lb-rank ${rankCls[i]||''}">${i+1}</div>
+      <img class="lb-img" src="${c.img}" alt="${c.name}" loading="lazy">
+      <div class="lb-info">
+        <div class="lb-name">${c.name}</div>
+        <div class="lb-det">${c.country} · ${c.specialty}</div>
+      </div>
+      <div class="lb-stat">
+        <strong>★ ${c.rating}</strong>
+        <small>${c.recipes} recipes</small>
+      </div>
+      <button class="chef-follow ${FV.follows.includes(c.name)?'following':''}" style="margin-left:.5rem;flex-shrink:0" onclick="followChef('${c.name}',this)">${FV.follows.includes(c.name)?'Following':'Follow'}</button>
+    </div>`).join('');
+  initReveal();
+}
+
+function renderAllChefs() {
+  document.getElementById('allChefsGrid').innerHTML = DB.chefs.map(c=>`
+    <div class="chef-card rv">
+      <img src="${c.img}" alt="${c.name}" loading="lazy">
+      <div class="chef-name">${c.name}</div>
+      <div class="chef-cntry">${c.country}</div>
+      <div class="chef-spec">${c.specialty}</div>
+      <div class="chef-stat">${c.recipes} recipes · ★ ${c.rating}</div>
+      <button class="chef-follow ${FV.follows.includes(c.name)?'following':''}" onclick="followChef('${c.name}',this)">${FV.follows.includes(c.name)?'Following':'Follow'}</button>
+    </div>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{ renderPodium(); renderLeaderboard(); renderAllChefs(); applyTheme(FV.theme); });
+</script>
+</body>
+</html>

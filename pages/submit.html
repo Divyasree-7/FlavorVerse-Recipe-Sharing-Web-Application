@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Submit Recipe — FlavorVerse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script>(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('fv_theme')||'dark'); })();</script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="nav scrolled" id="navbar">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html"><div class="logo-icon">F</div><span class="logo-name">FlavorVerse</span></a>
+    <nav class="nav-links">
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="explore.html">Explore</a>
+      <a class="nav-link" href="chefs.html">Chefs</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn">☀️</button>
+      <div class="lang-wrap">
+        <button class="lang-btn" id="langBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span id="langLabel">EN</span></button>
+        <div class="lang-drop" id="langDrop">
+          <div class="lang-opt" data-lang="en">🇬🇧 English</div>
+          <div class="lang-opt" data-lang="hi">🇮🇳 Hindi</div>
+          <div class="lang-opt" data-lang="te">🇮🇳 Telugu</div>
+          <div class="lang-opt" data-lang="kn">🇮🇳 Kannada</div>
+          <div class="lang-opt" data-lang="ta">🇮🇳 Tamil</div>
+          <div class="lang-opt" data-lang="es">🇪🇸 Español</div>
+          <div class="lang-opt" data-lang="fr">🇫🇷 Français</div>
+          <div class="lang-opt" data-lang="ar">🇸🇦 العربية</div>
+        </div>
+      </div>
+      <button class="ham" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mob-nav" id="mobNav">
+  <a class="mob-link" href="../index.html">🏠 Home</a>
+  <a class="mob-link" href="explore.html">🔍 Explore</a>
+  <a class="mob-link" href="chefs.html">👨‍🍳 Chefs</a>
+  <div class="mob-div"></div>
+  <div style="padding:.5rem 1rem"><button onclick="toggleTheme()" style="width:100%;background:var(--surf);padding:.6rem;border-radius:var(--r2);color:var(--tx);font-weight:600">🌙 Toggle Theme</button></div>
+</nav>
+
+<!-- Page Hero — NO loader -->
+<section class="page-hero">
+  <div class="wrap" style="position:relative;z-index:1">
+    <p class="ph-sup">Share Your Craft</p>
+    <h1 class="ph-title">Submit a Recipe</h1>
+    <p class="ph-sub">Share your favorite dish with 48,000+ food lovers worldwide</p>
+  </div>
+</section>
+
+<!-- Form -->
+<div class="wrap">
+  <div class="sub-wrap">
+    <!-- Main form -->
+    <div>
+      <!-- Basic info -->
+      <div class="form-card rv">
+        <h2>📝 Basic Information</h2>
+        <div class="fgrp"><label class="flbl">Recipe Name *</label><input class="finput" id="rName" type="text" placeholder="e.g. Grandma's Chicken Biryani"></div>
+        <div class="frow">
+          <div class="fgrp"><label class="flbl">Cuisine *</label>
+            <select class="fsel" id="rCuis">
+              <option>Indian</option><option>Italian</option><option>Japanese</option><option>Mexican</option>
+              <option>French</option><option>Chinese</option><option>Thai</option><option>Middle Eastern</option>
+              <option>American</option><option>Mediterranean</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fgrp"><label class="flbl">Meal Type *</label>
+            <select class="fsel" id="rCat">
+              <option>Breakfast</option><option>Lunch</option><option>Dinner</option>
+              <option>Snacks</option><option>Drinks</option><option>Desserts</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fgrp"><label class="flbl">Prep + Cook Time (min)</label><input class="finput" id="rTime" type="number" placeholder="e.g. 45" min="1"></div>
+          <div class="fgrp"><label class="flbl">Difficulty</label>
+            <select class="fsel" id="rDiff"><option>Easy</option><option>Medium</option><option>Hard</option></select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fgrp"><label class="flbl">Servings</label><input class="finput" id="rServ" type="number" placeholder="e.g. 4" min="1"></div>
+          <div class="fgrp"><label class="flbl">Calories (approx.)</label><input class="finput" id="rCal" type="number" placeholder="e.g. 450" min="0"></div>
+        </div>
+        <div class="fgrp"><label class="flbl">Short Description</label><textarea class="ftxt" id="rDesc" rows="3" placeholder="Describe your recipe in 2-3 sentences…"></textarea></div>
+      </div>
+
+      <!-- Photo & Video -->
+      <div class="form-card rv">
+        <h2>📸 Photo & Video</h2>
+        <div class="fgrp">
+          <label class="flbl">Recipe Photo</label>
+          <div class="drop-z" id="dropZone" ondragover="event.preventDefault();this.classList.add('dz-on')" ondragleave="this.classList.remove('dz-on')" ondrop="handleDrop(event)">
+            <p>📷 Drag & drop your photo here, or <span onclick="document.getElementById('photoInput').click()">browse</span></p>
+            <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+            <img class="drop-prev" id="photoPreview" alt="Preview">
+          </div>
+        </div>
+        <div class="fgrp">
+          <label class="flbl">YouTube Video URL (optional)</label>
+          <input class="finput" id="rVideo" type="url" placeholder="https://youtube.com/watch?v=..." oninput="previewVideo(this.value)">
+          <div id="videoPreview" style="margin-top:.6rem;border-radius:var(--r2);overflow:hidden;aspect-ratio:16/9;display:none;border:1px solid var(--b2)">
+            <iframe id="videoIframe" style="width:100%;height:100%;border:none" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ingredients -->
+      <div class="form-card rv">
+        <h2>🥗 Ingredients</h2>
+        <div class="tag-row">
+          <input type="text" id="ingrInput" placeholder="e.g. 2 cups basmati rice" onkeydown="if(event.key==='Enter'){event.preventDefault();addIngr()}">
+          <button class="tag-add" onclick="addIngr()">+ Add</button>
+        </div>
+        <div class="chips-wrap" id="ingrChips">
+          <!-- chips added here -->
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="form-card rv">
+        <h2>📋 Instructions</h2>
+        <div id="stepsWrap"></div>
+        <button class="btn-dash" onclick="addStep()">+ Add Step</button>
+      </div>
+
+      <!-- Author -->
+      <div class="form-card rv">
+        <h2>👤 About You</h2>
+        <div class="frow">
+          <div class="fgrp"><label class="flbl">Your Name *</label><input class="finput" id="rAuthor" type="text" placeholder="Chef name or alias"></div>
+          <div class="fgrp"><label class="flbl">Country</label><input class="finput" id="rCountry" type="text" placeholder="e.g. India"></div>
+        </div>
+        <div class="fgrp"><label class="flbl">Your Story (optional)</label><textarea class="ftxt" id="rStory" rows="2" placeholder="Share a little about this recipe…"></textarea></div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div>
+      <!-- Submit card -->
+      <div class="sb-card rv" style="position:sticky;top:calc(var(--nav-h) + 1rem)">
+        <h3>✅ Ready to Submit?</h3>
+        <p style="font-size:.82rem;color:var(--tx2);margin-bottom:1.2rem;line-height:1.7">Your recipe will be reviewed and published within 24 hours. Make sure all fields are filled correctly.</p>
+        <button class="sub-btn" onclick="submitRecipe()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          Submit Recipe
+        </button>
+        <div style="margin-top:1rem;font-size:.75rem;color:var(--tx3);text-align:center">By submitting you agree to our <a href="#" style="color:var(--indigo)">Terms</a></div>
+      </div>
+
+      <!-- Tips -->
+      <div class="sb-card rv">
+        <h3>💡 Tips for Success</h3>
+        <div class="sb-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Use a bright, clear food photo — it gets 3× more views</div>
+        <div class="sb-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Add a video for 5× more engagement</div>
+        <div class="sb-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Be specific with measurements (cups, grams, etc.)</div>
+        <div class="sb-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Number your steps clearly for easy following</div>
+        <div class="sb-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Include a short story — personal recipes get more saves</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="sb-card rv" style="text-align:center">
+        <h3>📈 Community Reach</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.8rem">
+          <div><div style="font-family:var(--fnt-d);font-size:1.8rem;color:var(--indigo);font-weight:700">48k</div><div style="font-size:.72rem;color:var(--tx3)">Active Cooks</div></div>
+          <div><div style="font-family:var(--fnt-d);font-size:1.8rem;color:var(--rose);font-weight:700">12</div><div style="font-size:.72rem;color:var(--tx3)">Countries Today</div></div>
+          <div><div style="font-family:var(--fnt-d);font-size:1.8rem;color:var(--amber);font-weight:700">500+</div><div style="font-size:.72rem;color:var(--tx3)">Recipes</div></div>
+          <div><div style="font-family:var(--fnt-d);font-size:1.8rem;color:var(--green);font-weight:700">4.8</div><div style="font-size:.72rem;color:var(--tx3)">Avg Rating</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Screen -->
+<div class="success-scr" id="successScr">
+  <div class="ok-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <h2>Recipe Submitted! 🎉</h2>
+  <p>Your recipe is under review and will appear on FlavorVerse within 24 hours. Thank you for sharing with our community!</p>
+  <div style="display:flex;gap:.75rem;justify-content:center">
+    <a href="explore.html" class="btn btn-p">Browse Recipes</a>
+    <button class="btn btn-o" onclick="document.getElementById('successScr').classList.remove('show')">Submit Another</button>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+let stepCount = 1;
+const ingrs = [];
+
+// Add initial step
+document.addEventListener('DOMContentLoaded', ()=>{ addStep(); applyTheme(FV.theme); });
+
+function addIngr() {
+  const inp = document.getElementById('ingrInput');
+  const val = inp.value.trim(); if(!val) return;
+  ingrs.push(val); inp.value = '';
+  renderIngrs();
+}
+function removeIngr(i) { ingrs.splice(i,1); renderIngrs(); }
+function renderIngrs() {
+  document.getElementById('ingrChips').innerHTML = ingrs.map((ing,i)=>
+    `<div class="ichip">${ing}<button class="ichip-x" onclick="removeIngr(${i})">✕</button></div>`).join('');
+}
+
+function addStep() {
+  const wrap = document.getElementById('stepsWrap');
+  const id = `step${stepCount}`;
+  const div = document.createElement('div');
+  div.className='step-row'; div.id=`sr${stepCount}`;
+  div.innerHTML=`<div class="step-num">${stepCount}</div><textarea placeholder="Describe step ${stepCount}…"></textarea><button class="step-del" onclick="removeStep('sr${stepCount}')">✕</button>`;
+  wrap.appendChild(div); stepCount++;
+}
+function removeStep(id) {
+  const el = document.getElementById(id); if(!el) return; el.remove();
+  // Renumber
+  document.querySelectorAll('.step-num').forEach((el,i)=>el.textContent=i+1);
+}
+
+function previewPhoto(input) {
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('photoPreview');
+    img.src = e.target.result; img.style.display='block';
+    document.getElementById('dropZone').classList.add('dz-on');
+  };
+  reader.readAsDataURL(file);
+}
+function handleDrop(e) {
+  e.preventDefault(); const dz = document.getElementById('dropZone'); dz.classList.remove('dz-on');
+  const file = e.dataTransfer.files[0]; if(!file||!file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = ev => { document.getElementById('photoPreview').src=ev.target.result; document.getElementById('photoPreview').style.display='block'; };
+  reader.readAsDataURL(file);
+}
+function previewVideo(url) {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/watch\?.+&v=))([\w-]{11})/);
+  const vp = document.getElementById('videoPreview');
+  if(match) {
+    document.getElementById('videoIframe').src=`https://www.youtube.com/embed/${match[1]}`;
+    vp.style.display='block';
+  } else { vp.style.display='none'; }
+}
+
+function submitRecipe() {
+  const name = document.getElementById('rName').value.trim();
+  const author = document.getElementById('rAuthor').value.trim();
+  if(!name){ toast('Please enter a recipe name', 'error'); document.getElementById('rName').focus(); return; }
+  if(!author){ toast('Please enter your name', 'error'); document.getElementById('rAuthor').focus(); return; }
+  if(!ingrs.length){ toast('Please add at least one ingredient', 'error'); return; }
+  const steps = [...document.querySelectorAll('#stepsWrap textarea')].map(t=>t.value.trim()).filter(Boolean);
+  if(!steps.length){ toast('Please add at least one instruction step', 'error'); return; }
+  document.getElementById('successScr').classList.add('show');
+}
+</script>
+</body>
+</html>
