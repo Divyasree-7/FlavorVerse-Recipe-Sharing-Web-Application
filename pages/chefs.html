@@ -141,7 +141,7 @@ function renderLeaderboard() {
         <strong>★ ${c.rating}</strong>
         <small>${c.recipes} recipes</small>
       </div>
-      <button class="chef-follow ${FV.follows.includes(c.name)?'following':''}" style="margin-left:.5rem;flex-shrink:0" onclick="followChef('${c.name}',this)">${FV.follows.includes(c.name)?'Following':'Follow'}</button>
+      <button class="chef-follow ${FV.follows.includes(c.name)?'following':''}" style="margin-left:.2rem;flex-shrink:0" onclick="followChef('${c.name}',this)">${FV.follows.includes(c.name)?'Following':'Follow'}</button>
     </div>`).join('');
   initReveal();
 }
